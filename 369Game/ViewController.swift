@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     var clapCount: Int {
         var count = 0
+        // TODO: String의 .count 말고 순회 도는 더 좋은 방법있을까?
         Array(1...maxNumber).forEach { number in
             let _ = String(number).count { num in
                 if num == "3" || num == "6" || num == "9" {
@@ -77,6 +78,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func setTextField() {
         textField.delegate = self
+        
         textField.borderStyle = UITextField.BorderStyle.line
         textField.textAlignment = NSTextAlignment.center
         textField.attributedPlaceholder = NSAttributedString(string: "최대 숫자를 입력해주세요", attributes: [.foregroundColor: UIColor.systemGray, .font: UIFont.boldSystemFont(ofSize: 16)])
@@ -94,13 +96,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // TODO: verticalAlignment 조절하는 법
     func setTextView() {
-        textView.text = clapArrayString
-        textView.textContainerInset.top = (textView.frame.height / 2) - CGFloat((textView.text.count / 49) * 16)
+        setTextViewText()
         textView.textAlignment = .center
         textView.isSelectable = false
         textView.textColor = .systemGray
         textView.font = UIFont.boldSystemFont(ofSize: 16)
         
+    }
+    func setTextViewText() {
+        textView.text = clapArrayString
+        textView.textContainerInset.top = (textView.frame.height / 2) - CGFloat((textView.text.count / 49) * 16)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -120,9 +125,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         maxNumber = selectedNumber
         textField.text = String(selectedNumber)
         countLabel.text = countClapString
-        textView.text = clapArrayString
-        textView.textContainerInset.top = (textView.frame.height / 2) - CGFloat((textView.text.count / 49) * 16)
-        print(textView.text.count)
+        setTextViewText()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
