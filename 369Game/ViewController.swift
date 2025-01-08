@@ -137,6 +137,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         setTextViewText()
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        numberPickerView.selectRow(numberArray.firstIndex(of: maxNumber) ?? 0, inComponent: 0, animated: false)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
     }
