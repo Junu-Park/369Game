@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // TODO: String의 .count 말고 순회 도는 더 좋은 방법있을까?
         Array(1...maxNumber).forEach { number in
             let _ = String(number).count { num in
-                if num == "3" || num == "6" || num == "9" {
+                if isString369(numString: num) {
                     count += 1
                 }
                 return true
@@ -40,7 +40,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         Array(1...maxNumber).forEach { number in
             var clapString: String = ""
             let _ = String(number).count { num in
-                if num == "3" || num == "6" || num == "9" {
+                if isString369(numString: num) {
                     clapString += "👏"
                 } else {
                     clapString += "\(num)"
@@ -69,6 +69,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         setTextField()
         setTextView()
         setCountLabel()
+    }
+    
+    func isString369(numString: String.Element) -> Bool {
+        switch numString {
+        case "3","6", "9":
+            return true
+        default:
+            return false
+        }
     }
     
     func setTitleLabel() {
